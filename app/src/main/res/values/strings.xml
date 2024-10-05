@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Article App</string>
+    <string name="share">Share</string>
+    <string name="article_image">Article image</string>
+    <string name="about_name">Rahmat Hidayatullah</string>
+    <string name="about_email">bokirsianpar95@gmail.com</string>
+    <string name="about">About</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="published_at">Published at: %1$s</string>
+    <string name="written_by">"Written by: %1$s"</string>
 </resources>
