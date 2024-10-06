@@ -3,13 +3,10 @@ package dev.erhahahaa.articleapp.activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toolbar
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -17,24 +14,22 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import dev.erhahahaa.articleapp.R
 import dev.erhahahaa.articleapp.model.Article
+import dev.erhahahaa.articleapp.setDefaultAppBarColor
+
 
 class DetailActivity : AppCompatActivity() {
-
-  private lateinit var author: TextView
-  private lateinit var publishedAt: TextView
-  private lateinit var contentView: TextView
-  private lateinit var imageView: ImageView
-  private lateinit var shareButton: Button
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_detail)
+    setDefaultAppBarColor(supportActionBar, window, resources, theme)
 
-    author = findViewById(R.id.author)
-    publishedAt = findViewById(R.id.publishedAt)
-    contentView = findViewById(R.id.detailContent)
-    imageView = findViewById(R.id.detailImage)
-    shareButton = findViewById(R.id.action_share)
+    val title: TextView = findViewById(R.id.detailTitle)
+    val author: TextView = findViewById(R.id.author)
+    val publishedAt: TextView = findViewById(R.id.publishedAt)
+    val contentView: TextView = findViewById(R.id.detailContent)
+    val imageView: ImageView = findViewById(R.id.detailImage)
+    val shareButton: Button = findViewById(R.id.action_share)
 
     val article = if (Build.VERSION.SDK_INT >= 33) {
       intent.getParcelableExtra("article", Article::class.java)
@@ -44,6 +39,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     if (article != null) {
+      title.text = article.title
       author.text = application.getString(R.string.written_by, article.author)
       publishedAt.text = application.getString(R.string.published_at, article.publishedAt)
       contentView.text = article.content
@@ -75,6 +71,7 @@ class DetailActivity : AppCompatActivity() {
         finish()
         true
       }
+
       else -> super.onOptionsItemSelected(item)
     }
   }
